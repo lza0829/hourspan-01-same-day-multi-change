@@ -1,0 +1,74 @@
+{
+  "snapshots": [
+    {
+      "id": "SNAP-SD-EAST02-01",
+      "store_id": "ST-EAST-02",
+      "as_of_ts": "2026-11-16T08:00:00Z",
+      "open_time": "09:00",
+      "close_time": "22:00",
+      "weekday_mask": "1111110",
+      "biz_status": "open",
+      "payload": {"reason": "同日首变：提前开门"}
+    },
+    {
+      "id": "SNAP-SD-EAST02-02",
+      "store_id": "ST-EAST-02",
+      "as_of_ts": "2026-11-16T10:00:00Z",
+      "open_time": "09:00",
+      "close_time": "22:00",
+      "weekday_mask": "1111110",
+      "biz_status": "open",
+      "payload": {"reason": "属性未变（hash 相同），不应产生新段"}
+    },
+    {
+      "id": "SNAP-SD-EAST02-03",
+      "store_id": "ST-EAST-02",
+      "as_of_ts": "2026-11-16T12:30:00Z",
+      "open_time": "09:00",
+      "close_time": "23:00",
+      "weekday_mask": "1111110",
+      "biz_status": "open",
+      "payload": {"reason": "同日二变：延长闭店"}
+    },
+    {
+      "id": "SNAP-SD-EAST02-04",
+      "store_id": "ST-EAST-02",
+      "as_of_ts": "2026-11-16T18:45:00Z",
+      "open_time": "09:00",
+      "close_time": "23:00",
+      "weekday_mask": "1111110",
+      "biz_status": "suspended",
+      "payload": {"reason": "同日三变：傍晚暂停营业"}
+    },
+    {
+      "id": "SNAP-SD-WEST01-01",
+      "store_id": "ST-WEST-01",
+      "as_of_ts": "2026-11-16T07:30:00Z",
+      "open_time": "08:00",
+      "close_time": "20:30",
+      "weekday_mask": "1111100",
+      "biz_status": "open",
+      "payload": {"reason": "同日首变：提前开门"}
+    },
+    {
+      "id": "SNAP-SD-WEST01-02",
+      "store_id": "ST-WEST-01",
+      "as_of_ts": "2026-11-16T15:00:00Z",
+      "open_time": "08:00",
+      "close_time": "21:00",
+      "weekday_mask": "1111100",
+      "biz_status": "open",
+      "payload": {"reason": "同日二变：延长闭店"}
+    },
+    {
+      "id": "SNAP-SD-NORTH01-01",
+      "store_id": "ST-NORTH-01",
+      "as_of_ts": "2026-11-16T09:30:00Z",
+      "open_time": "10:00",
+      "close_time": "19:00",
+      "weekday_mask": "1111100",
+      "biz_status": "open",
+      "payload": {"reason": "同日变更：失败闭演练用"}
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+backend/data/
+
+# Node / Vite
+node_modules/
+dist/
+
+# Local smoke data
+*.db

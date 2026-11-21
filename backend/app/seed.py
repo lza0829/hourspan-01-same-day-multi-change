@@ -87,6 +87,39 @@ CREATE TABLE IF NOT EXISTS scd_proofs (
   created_at TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS same_day_chains (
+  id TEXT PRIMARY KEY,
+  store_id TEXT NOT NULL REFERENCES stores(id),
+  day TEXT NOT NULL,
+  first_as_of_ts TEXT NOT NULL,
+  last_as_of_ts TEXT NOT NULL,
+  segment_count INTEGER NOT NULL,
+  last_hist_id TEXT NOT NULL,
+  last_hash TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'applied',
+  created_at TEXT NOT NULL,
+  UNIQUE(store_id, day)
+);
+
+CREATE TABLE IF NOT EXISTS same_day_chain_segments (
+  id TEXT PRIMARY KEY,
+  chain_id TEXT NOT NULL REFERENCES same_day_chains(id),
+  store_id TEXT NOT NULL REFERENCES stores(id),
+  segment_no INTEGER NOT NULL,
+  hist_id TEXT NOT NULL,
+  prev_hist_id TEXT,
+  source_snapshot_id TEXT NOT NULL,
+  valid_from TEXT NOT NULL,
+  valid_to TEXT,
+  row_hash TEXT NOT NULL,
+  UNIQUE(chain_id, segment_no)
+);
+
+CREATE INDEX IF NOT EXISTS idx_sameday_store_day
+  ON same_day_chains(store_id, day);
+CREATE INDEX IF NOT EXISTS idx_sameday_seg_chain
+  ON same_day_chain_segments(chain_id, segment_no);
+
 CREATE INDEX IF NOT EXISTS idx_hist_store_current
   ON dim_store_hours_hist(store_id, is_current);
 CREATE INDEX IF NOT EXISTS idx_snap_store_ts

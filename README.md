@@ -22,3 +22,18 @@ npm run dev
 ```
 
 或：`docker compose up -d --build`（6200 / 11200）
+
+## 已实现邻题：same_day_multi_change（同业务键同日多变更）
+
+- 落库形态（甲）：`dim_store_hours_hist` 连续多行，同日每次属性 hash 相对前序变化按 as_of 升序关旧开新；相邻段 `valid_to = 下段 valid_from`，不重叠不留洞；`same_day_chains` / `same_day_chain_segments` 台账挂前后 hist_id。禁止只留末日一行、禁止原地覆盖。
+- 失败闭（甲）：整日多段开闭、当前镜刷新、核证条写在同一事务，提交前自检双 current / 镜末段错位即回滚；注入演练（`simulate_fail_after_mirror`）可验证整日回到变更前。
+- 只读核证：`GET /api/same-day/chain?store_id=&day=`（店、日、段数、各段 valid 区间、末段 hash、链态 open/superseded、违规项）；前端「同日多段链」页协同入档/写闸/镜刷新/核证。
+- 夹具：`fixtures/same_day_multi_change_batch.json`（同键同日 2–3 次变更，含 hash 相同 no-op）。
+
+测试（stdlib，无第三方依赖）：
+
+```powershell
+cd backend
+$env:DATA_DIR="$PWD/data-test"
+python -m unittest app.tests.test_same_day_multi_change -v
+```

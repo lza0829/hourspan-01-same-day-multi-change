@@ -1,0 +1,14 @@
+{
+  "snapshots": [
+    {
+      "id": "SNAP-LATER-WEST01",
+      "store_id": "ST-WEST-01",
+      "as_of_ts": "2026-11-20T00:00:00Z",
+      "open_time": "07:00",
+      "close_time": "22:00",
+      "weekday_mask": "1111100",
+      "biz_status": "open",
+      "payload": {"reason": "后续日变更：接管同日链末段，验证历史链核证仍有效"}
+    }
+  ]
+}

@@ -14,10 +14,13 @@ export default function Ingest() {
 
   useEffect(() => { reload(); }, []);
 
-  const run = async () => {
+  const run = async (fixture = "ingest_change_batch.json") => {
     setErr("");
     try {
-      const r = await api("/api/ingest/run", { method: "POST", body: "{}" });
+      const r = await api("/api/ingest/run", {
+        method: "POST",
+        body: JSON.stringify({ fixture }),
+      });
       setMsg(JSON.stringify(r, null, 2));
       await reload();
     } catch (e) {
@@ -35,7 +38,10 @@ export default function Ingest() {
       </div>
       <div className="panel">
         <div className="actions">
-          <button onClick={run}>跑变更夹具入档</button>
+          <button onClick={() => run()}>跑变更夹具入档</button>
+          <button className="secondary" onClick={() => run("same_day_multi_change_batch.json")}>
+            跑同日多变更夹具
+          </button>
           <button className="secondary" onClick={reload}>刷新</button>
         </div>
         {msg && <pre className="msg">{msg}</pre>}
